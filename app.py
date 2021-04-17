@@ -1,15 +1,12 @@
 # Required imports
-from datetime import datetime
 import os
+from datetime import datetime
 from flask import abort, Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 from firebase_admin import credentials, firestore, initialize_app, auth
 
-
-# @app.route("/")
-# @cross_origin()
-# def helloWorld():
-#     return "Hello, cross-origin-world!"
+# Imports the Google Cloud client library
+from google.cloud import language_v1
 
 
 # Initialize Flask app
@@ -25,6 +22,8 @@ db = firestore.client()
 application_ref = db.collection("applications")
 profile_ref = db.collection("profiles")
 
+# Instantiates a NLP client
+client = language_v1.LanguageServiceClient()
 
 # APPLICATION ENDPOINTS
 @app.route("/applications", methods=["GET"])
@@ -147,6 +146,67 @@ def get_profile(user_id):
         return f"An Error Occured: {e}"
 
 
+# GCLOUD ENDPOINTS
+@app.route("/interviews/nlp", methods=["GET"])
+@cross_origin()
+def get_nlp_analysis():
+    """
+    Get NLP analysis
+    """
+    try:
+        # The text to analyze
+        text = "Hello, world!"
+        document = language_v1.Document(
+            content=text, type_=language_v1.Document.Type.PLAIN_TEXT
+        )
+
+        # Detects the sentiment of the text
+        sentiment = client.analyze_sentiment(
+            request={"document": document}
+        ).document_sentiment
+
+        nlp_analysis = {
+            "text": text,
+            "sentiment_score": sentiment.score,
+            "sentiment_magnitude": sentiment.magnitude,
+        }
+
+        return jsonify(nlp_analysis), 200
+    except Exception as e:
+        print(e)
+        return f"An Error Occured: {e}"
+
+
+@app.route("/interviews/nlp", methods=["GET"])
+@cross_origin()
+def get_nlp_analysis():
+    """
+    Get NLP analysis
+    """
+    try:
+        # The text to analyze
+        text = "Hello, world!"
+        document = language_v1.Document(
+            content=text, type_=language_v1.Document.Type.PLAIN_TEXT
+        )
+
+        # Detects the sentiment of the text
+        sentiment = client.analyze_sentiment(
+            request={"document": document}
+        ).document_sentiment
+
+        nlp_analysis = {
+            "text": text,
+            "sentiment_score": sentiment.score,
+            "sentiment_magnitude": sentiment.magnitude,
+        }
+
+        return jsonify(nlp_analysis), 200
+    except Exception as e:
+        print(e)
+        return f"An Error Occured: {e}"
+
+
 # @app.route("/signin", methods=["POST"])
 # def signin(name=None):
 #     """
@@ -203,26 +263,11 @@ def session_login():
         return flask.abort(401, "Failed to create a session cookie")
 
 
-# @app.route("/list", methods=["GET"])
-# def read():
-#     """
-#     read() : Fetches documents from Firestore collection as JSON.
-#     todo : Return document that matches query ID.
-#     all_todos : Return all documents.
-#     """
-#     try:
-#         # Check if ID was passed to URL query
-#         todo_id = request.args.get("id")
-#         if todo_id:
-#             todo = todo_ref.document(todo_id).get()
-#             return jsonify(todo.to_dict()), 200
-#         else:
-#             all_todos = [doc.to_dict() for doc in todo_ref.stream()]
-#             return jsonify(all_todos), 200
-#     except Exception as e:
-#         return f"An Error Occured: {e}"
-
-
 port = int(os.environ.get("PORT", 8080))
 if __name__ == "__main__":
     app.run(threaded=True, host="0.0.0.0", port=port)
+
+# export FLASK_DEBUG=1
+# Running Cloud SDK in Docker Image https://cloud.google.com/sdk/docs/downloads-docker
+# Installing GCloud SDK https://cloud.google.com/sdk/docs/install
+# Setting up NLP API https://cloud.google.com/natural-language/docs/reference/libraries#client-libraries-install-python
