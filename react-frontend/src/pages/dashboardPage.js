@@ -18,7 +18,7 @@ import { getProfile } from "../redux/actions/profileActions";
 // import ContactEditorModal from "../components/contacts/contactEditorModal";
 
 // css styles
-// import "../css/page.css";
+import "../css/page.css";
 const userId = "XYrpS0dU2ATb44u15KWy9qNfP9q1";
 
 class DashboardPage extends Component {
@@ -51,8 +51,14 @@ class DashboardPage extends Component {
     // console.log(profile);
 
     return (
-      <div>
-        <div>{profile.name}</div>
+      <div className="container">
+        <div className="profile-header">
+          <h1 className="profile-name">{profile.name}</h1>
+        </div>
+        <nav>
+          <div>Applications</div>
+          <div>Interview Prep</div>
+        </nav>
         <div>
           {applications.map((application, i) => (
             <div
