@@ -1,10 +1,6 @@
-document.onload = function () {
+window.onload = function () {
   getDOM();
-
-  // $("#company-name").val("boop");
-  // $("#job-role").val("boop");
-  // $("#location").val("boop");
-  // $("#job-link").val("boop");
+  document.getElementById("submit").addEventListener("click", sendJobToDatabase);
 };
 
 // function doStuffWithDom(domContent, url) {
@@ -49,18 +45,19 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 
 function sendJobToDatabase() {
   let body = {
-    application_link: $("#job-link").value,
+    application_link: $("#job-link").val(),
     application_status: "applied",
-    company_name: $("#company-name").value,
+    company_name: $("#company-name").val(),
     // "date_applied": "Fri, 16 Apr 2021 04:00:00 GMT",
     events: [],
-    job_role: $("#job-role").value,
+    job_role: $("#job-role").val(),
     notes: "",
-    office_address: $("#location").value,
+    office_address: $("#location").val(),
   };
   console.log(body);
   chrome.runtime.sendMessage({
     msg: "sendPosting",
     body: body,
   });
+  window.close()
 }

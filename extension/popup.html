@@ -6,17 +6,18 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     /> -->
+    <script src="third_party/jquery-3.6.0.slim.min.js"></script>
     <link rel="stylesheet" href="popup.css" />
     <script src="popup.js"></script>
   </head>
   <body>
-    <div class="container">
+    <div class="container" style="padding-left: 30px; padding-right: 30px">
       <header class="extension-header">
         <h1></h1>
         <h1 class="extension-title">jobarchi.tech</h1>
         <h1></h1>
       </header>
-      <form class="form-container" onsubmit="sendJobToDatabase()">
+      <form class="form-container">
         <div class="form-section">
           <label class="form-label" for="company-name">Company</label><br />
           <input class="form-input" id="company-name" type="input" value="" placeholder="Company" />
