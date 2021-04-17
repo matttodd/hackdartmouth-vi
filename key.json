@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "hackdartmouth-vi",
+  "private_key_id": "a93abb5af375f4412fb2df52695d8e350bc4e930",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDyXCvZJ5zqQAfT\nKTXKRgq95Oc9zdny2GNFYPqhwUSC9O1gYbmteDEdgwSsN/FwF1VbRBkWgNQ4jMcX\nT8SRQtdWH22rQa5ULghQn+WySvu7p939qa+0pbN4pMPupyele7xLPamyVdj4eEZT\n4wQRWmKQHujqzcopAVwUfYhc1phUm+4JPw21NWySFs8Nq6lI45cM7BKI16Opb4HQ\nZ/iCRljuiR5pYuMxPumXF37HvjOFEOgu61SX3cVLrvax/F4YGQOeaDNekuhzP49/\nvi3rqat/htA3nP//b1jLiEbdWUnQwjwg+BEcCOLLlf9IYf1DqLslA1Wjvh2aoA5H\n4DDbvxjpAgMBAAECggEANYvOtkYtwYWPFQTMWRnbgrQBsSJ7bk+Hs0rnZPiN2f8i\nOQKuYtikxVfuntwnUDQfjDAB+PpSqQHVdN2PWOazK9h6wvUafofDF4kUVy2A66d9\ngO9OHjPj8Jo6nc45kLLDWb5QcVHNQ6xTIXKNMgZNs3jYzhPUf/XIcdCAYb6Z3ks9\nHac4b5elNCIxZZvBdbbxbe4EWHtyvgy9zuvxPGJ8kb8EYc3CDLL0vW0LgI6xjSzv\nvdqPhvvT31PVGxLYT6nZpzuXQThk6jVM7gFW+M2kS6BVHn2+aKXwmGQrr5S2edaS\nalyFkuVE4fP/WRWcK3AiWFDSZ37yNaXrzZY8SPjXfwKBgQD5w7p+/2XYl1tFHaXt\ngfIG9jUOs3FyUkhJrSDu6ctV9aQVtvBJvDRP/V869zXhEL0c1F+3akgMyWv1zD6E\nBaVX6rTzvZMOQ2iUmWcLT392tGaWuJ/bVKGAThrMB8HINOg8QDmBopxIS2LIgGxm\nqpqs2SaW4qyv9AmQ9q9V/XhESwKBgQD4aR6lu6uexKsfS1i7WnNymbeRKPfYyhMX\nyf8+j0Pk/cykVHUYTegAQOzI/ReHjyFzl9HJ5jZrF+34z3co497eaoJBzE3qq/xx\nIWexbYpOFstz4078i0GqBUcBpCRmBt5n/2KdqgMZ3WKwUmwck8xsC9tsj/JFsR93\nrVJO336PGwKBgQCJIv7zXCf/lJt4h57jmcXaLLVVLRHNQ4CNc5HxnE0ZFZbSlW+6\nDKxsfyIarkHXIem0OqeTfbexzaaJf2uT8cWnUCeq7RwhaMGzVcdOXogOFV9+wkCD\nnSRP3pK4FEpCM0qQSnNIypAk4b+Ld3gNpv7miRS3JB7NPaFDBy+ed13hoQKBgEiQ\nLGutToyqVnJlyB2yZlbroDu/A+dH4Bvq3aygnOyfVtAJ+8qFt2ebj4+GnwDyRotF\npfqcTPkrnFA6Ckzfg5Lk+ffOflQ2uR8y6t9haC03a2cG12PeKehIcl2AXUGQcBdg\n+qWjrBQ6H0HyUbJnWieVrxsfUV4aR17mOkzf7FBRAoGAGocDDZsY01j5ThQzWsc3\niUD5IYOx5eAebNjD3y3If+ozvpR8B/DlH9N76yvHctDIClePTcPFXXOWAn5S1X7k\nFuRvfqAhRrb9J1PYzGuiBla51AOhybpi7f0iNyWRQ9U0b46WonvIZbFBrTRGJ5qA\nUIBfHjNG51fqNoJdzcMwIt4=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-px95q@hackdartmouth-vi.iam.gserviceaccount.com",
+  "client_id": "114735755833189500017",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-px95q%40hackdartmouth-vi.iam.gserviceaccount.com"
+}
