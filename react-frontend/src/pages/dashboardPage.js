@@ -55,9 +55,9 @@ class DashboardPage extends Component {
         <div className="profile-header">
           <h1 className="profile-name">{profile.name}</h1>
         </div>
-        <nav>
-          <div>Applications</div>
-          <div>Interview Prep</div>
+        <nav className="nav-bar">
+          <div className="nav-tab">Applications</div>
+          <div className="nav-tab">Interview Prep</div>
         </nav>
         <div>
           {applications.map((application, i) => (
