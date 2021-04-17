@@ -14,15 +14,12 @@ import "./App.css";
 import axios from "axios";
 
 // Pages
-import contactPage from "./pages/contactPage";
+import DashboardPage from "./pages/dashboardPage";
 // import LoginPage from "./pages/loginPage";
 import logout from "./pages/logout";
 
-// axios.defaults.withCredentials = !(window.location.hostname === "localhost");
-axios.defaults.withCredentials = true;
-window.location.hostname === "localhost"
-  ? (axios.defaults.baseURL = "http://localhost:5000/api")
-  : (axios.defaults.baseURL = "/api");
+// axios.defaults.withCredentials = true;
+axios.defaults.baseURL = "http://127.0.0.1:5000";
 
 // Authentication
 // const hasValidCookie = localStorage.hasValidCookie;
@@ -45,10 +42,10 @@ class App extends Component {
           <Switch>
             {/* <AuthRoute exact path="/login" component={LoginPage} /> */}
             <Route exact path="/">
-              <Redirect to="/contacts" />
+              <Redirect to="/dashboard" />
             </Route>
-            <Route exact path="/contacts" component={contactPage} />
-            <Route exact path="/logout" component={logout} />
+            <Route exact path="/dashboard" component={DashboardPage} />
+            {/* <Route exact path="/logout" component={logout} /> */}
             {/* <Route exact path="/resources/:folderId" component={FolderPage} />
                 <Route exact path="/resources/search/:searchTerm" component={SearchPage} /> */}
           </Switch>

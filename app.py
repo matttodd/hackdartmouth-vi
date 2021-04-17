@@ -2,10 +2,20 @@
 from datetime import datetime
 import os
 from flask import abort, Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 from firebase_admin import credentials, firestore, initialize_app, auth
+
+
+# @app.route("/")
+# @cross_origin()
+# def helloWorld():
+#     return "Hello, cross-origin-world!"
+
 
 # Initialize Flask app
 app = Flask(__name__)
+cors = CORS(app)
+app.config["CORS_HEADERS"] = "Content-Type"
 
 # Initialize Firestore DB
 cred = credentials.Certificate("key.json")
@@ -17,6 +27,28 @@ application_ref = db.collection("applications")
 
 
 # APPLICATION ENDPOINTS
+@app.route("/applications", methods=["GET"])
+@cross_origin()
+def get_all_applications():
+    """
+    Get all applications.
+    """
+    try:
+        # request fields
+        applications = application_ref.stream()
+
+        applications_list = []
+        for a in applications:
+            application = a.to_dict()
+            application["id"] = a.id
+            applications_list.append(application)
+
+        return jsonify(applications_list), 200
+    except Exception as e:
+        print(e)
+        return f"An Error Occured: {e}"
+
+
 @app.route("/applications/<user_id>", methods=["GET"])
 def get_all_user_applications(user_id):
     """
@@ -25,6 +57,7 @@ def get_all_user_applications(user_id):
     try:
         # request fields
         # applications = application_ref.stream()
+        print("FUCK")
         applications = application_ref.where("user_id", "==", user_id).stream()
 
         applications_list = []
