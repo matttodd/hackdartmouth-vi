@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 
 import { userReducer } from "./reducers/userReducer";
 import { applicationReducer } from "./reducers/applicationReducer";
-// import { contactReducer } from "./reducers/contactReducer";
+import { profileReducer } from "./reducers/profileReducer";
 import { uiReducer } from "./reducers/uiReducer";
 
 const initialState = {};
@@ -14,6 +14,7 @@ const reducers = combineReducers({
   user: userReducer,
   // contacts: contactReducer,
   applications: applicationReducer,
+  profile: profileReducer,
   ui: uiReducer,
 });
 

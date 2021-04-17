@@ -22,8 +22,8 @@ cred = credentials.Certificate("key.json")
 default_app = initialize_app(cred)
 
 db = firestore.client()
-# todo_ref = db.collection("todos")
 application_ref = db.collection("applications")
+profile_ref = db.collection("profiles")
 
 
 # APPLICATION ENDPOINTS
@@ -50,6 +50,7 @@ def get_all_applications():
 
 
 @app.route("/applications/<user_id>", methods=["GET"])
+@cross_origin()
 def get_all_user_applications(user_id):
     """
     Get all applications for specified user.
@@ -73,6 +74,7 @@ def get_all_user_applications(user_id):
 
 
 @app.route("/applications/<user_id>", methods=["POST"])
+@cross_origin()
 def post_user_application(user_id):
     """
     Post application for specified user.
@@ -92,6 +94,7 @@ def post_user_application(user_id):
 
 
 @app.route("/applications/<application_id>", methods=["PUT"])
+@cross_origin()
 def update_user_applications(application_id):
     """
     Update application for specified user.
@@ -106,6 +109,7 @@ def update_user_applications(application_id):
 
 
 @app.route("/applications/<application_id>", methods=["DELETE"])
+@cross_origin()
 def delete_user_applications(application_id):
     """
     delete application for specified user.
@@ -120,20 +124,24 @@ def delete_user_applications(application_id):
         return f"An Error Occured: {e}"
 
 
-# AUTHENTICATION ENDPOINTS
-@app.route("/signup", methods=["POST"])
-def sign_up(name=None):
+# PROFILE ENDPOINTS
+@app.route("/profiles/<user_id>", methods=["GET"])
+@cross_origin()
+def get_profile(user_id):
     """
-    Sign up
+    Get all applications for specified user.
     """
     try:
-        # request.json  # {username: 123, pw: 123}
-        # firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-        user = auth.create_user(
-            email=request.json["email"], password=request.json["password"]
-        )
+        # request fields
+        profiles = profile_ref.where("user_id", "==", user_id).stream()
 
-        return {"message": f"Successfully created user {user.uid}"}, 200
+        profiles_list = []
+        for p in profiles:
+            profile = p.to_dict()
+            profile["id"] = p.id
+            profiles_list.append(profile)
+
+        return jsonify(profiles_list[0]), 200
     except Exception as e:
         print(e)
         return f"An Error Occured: {e}"
