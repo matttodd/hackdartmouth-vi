@@ -177,36 +177,6 @@ def get_nlp_analysis():
         return f"An Error Occured: {e}"
 
 
-@app.route("/interviews/nlp", methods=["GET"])
-@cross_origin()
-def get_nlp_analysis():
-    """
-    Get NLP analysis
-    """
-    try:
-        # The text to analyze
-        text = "Hello, world!"
-        document = language_v1.Document(
-            content=text, type_=language_v1.Document.Type.PLAIN_TEXT
-        )
-
-        # Detects the sentiment of the text
-        sentiment = client.analyze_sentiment(
-            request={"document": document}
-        ).document_sentiment
-
-        nlp_analysis = {
-            "text": text,
-            "sentiment_score": sentiment.score,
-            "sentiment_magnitude": sentiment.magnitude,
-        }
-
-        return jsonify(nlp_analysis), 200
-    except Exception as e:
-        print(e)
-        return f"An Error Occured: {e}"
-
-
 # @app.route("/signin", methods=["POST"])
 # def signin(name=None):
 #     """

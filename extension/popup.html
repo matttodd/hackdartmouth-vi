@@ -1,18 +1,40 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="popup.css">
-        <script src="popup.js"></script>
-    </head>
-    <body class="jumbotron">
-        <div class="container">
-            <h4 class="text-center">Career Archi-Tech</h1>
+  <head>
+    <!-- <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    /> -->
+    <link rel="stylesheet" href="popup.css" />
+    <script src="popup.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <header class="extension-header">
+        <h1></h1>
+        <h1 class="extension-title">jobarchi.tech</h1>
+        <h1></h1>
+      </header>
+      <form class="form-container" onsubmit="sendJobToDatabase()">
+        <div class="form-section">
+          <label class="form-label" for="company-name">Company</label><br />
+          <input class="form-input" id="company-name" type="input" value="" placeholder="Company" />
         </div>
-        <div>
-            <div class="text-center">
-                <input id="submit" type="submit" value="Track Application">
-            </div>
+        <div class="form-section">
+          <label class="form-label" for="company-name">Job role</label><br />
+          <input class="form-input" id="job-role" type="input" value="" placeholder="Position" />
         </div>
-        <div class="text-center" id="demo"></div>
-    </body>
+        <div class="form-section">
+          <label class="form-label" for="company-name">Location</label><br />
+          <input class="form-input" id="location" type="input" value="" placeholder="Location" />
+        </div>
+        <div class="form-section">
+          <label class="form-label" for="company-name">Posting link</label><br />
+          <input class="form-input" id="job-link" type="input" value="" placeholder="Job link" />
+        </div>
+        <input class="form-button" id="submit" type="submit" value="Submit" />
+      </form>
+    </div>
+  </body>
 </html>

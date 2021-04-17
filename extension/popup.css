@@ -1,14 +1,81 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+
 .jumbotron {
-    background-color: #f4511e; /* Orange */
-    color: #ffffff;
-    margin-bottom: 0px;
-  }
+  /* background-color: #d8d8d8; Grey */
+  /* color: #ffffff; */
+  margin-bottom: 0px;
+}
 
-  .pad {
-      margin: 8px;
-  }
+.pad {
+  margin: 8px;
+}
 
-  .align-middle {
-      margin-top: auto;
-      margin-bottom: auto;
-  }
+.align-middle {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+/* HEADER */
+
+.extension-header {
+  width: 100%;
+  border-bottom: 1px solid #edeff1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.extension-title {
+  color: #666666;
+  font-size: 24pt;
+  margin: 0;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.form-section {
+  max-width: 400px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.form-label {
+  color: #666666;
+  font-size: 14pt;
+  margin-bottom: 15px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #cfcfcf;
+  border-radius: 10px;
+  font-size: 12pt;
+  margin-top: 5px;
+}
+
+.form-button {
+  background-color: #11a0f3;
+  border: none;
+  border-radius: 10px;
+  font-size: 18pt;
+  color: white;
+  padding: 20px 80px;
+  cursor: pointer;
+}
