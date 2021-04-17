@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-d
 // Redux
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import { SET_AUTHENTICATED } from "./redux/types";
-import { logoutUser, getUserData } from "./redux/actions/userActions";
+// import { SET_AUTHENTICATED } from "./redux/types";
+// import { logoutUser, getUserData } from "./redux/actions/userActions";
 
 // Styles
 import "./App.css";
@@ -16,7 +16,7 @@ import axios from "axios";
 // Pages
 import DashboardPage from "./pages/dashboardPage";
 // import LoginPage from "./pages/loginPage";
-import logout from "./pages/logout";
+// import logout from "./pages/logout";
 
 // axios.defaults.withCredentials = true;
 axios.defaults.baseURL = "http://127.0.0.1:5000";

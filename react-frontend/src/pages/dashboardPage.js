@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
 
 // redux
 import { connect } from "react-redux";
@@ -15,7 +14,8 @@ import {
 import { getProfile } from "../redux/actions/profileActions";
 
 // Components
-// import ContactEditorModal from "../components/contacts/contactEditorModal";
+import Applications from "../components/applications/applicationsComponent";
+import InterviewPrep from "../components/interviewPrep/interviewPrepComponent";
 
 // css styles
 import "../css/page.css";
@@ -29,6 +29,7 @@ class DashboardPage extends Component {
       profile: {
         name: "",
       },
+      selectedTab: "applications",
     };
   }
 
@@ -38,17 +39,15 @@ class DashboardPage extends Component {
     this.props.getProfile(userId);
   }
 
+  changeTab(tabName) {
+    this.setState({
+      selectedTab: tabName,
+    });
+  }
+
   render() {
-    // const { isAdmin } = this.props.user;
-    // const { errors, loadingActions } = this.props.ui;
     const { applications } = this.props.applications;
     const { profile } = this.props.profile;
-    // const floatAddButtonOptions = {
-    //   Department: this.handleAddorEditDepartment,
-    //   Contact: this.handleAddorEditContact,
-    // };
-    // console.log(applications);
-    // console.log(profile);
 
     return (
       <div className="container">
@@ -56,22 +55,25 @@ class DashboardPage extends Component {
           <h1 className="profile-name">{profile.name}</h1>
         </div>
         <nav className="nav-bar">
-          <div className="nav-tab">Applications</div>
-          <div className="nav-tab">Interview Prep</div>
+          <div
+            className={
+              "nav-tab " + (this.state.selectedTab === "applications" && "selected-nav-tab")
+            }
+            onClick={() => this.changeTab("applications")}
+          >
+            Applications
+          </div>
+          <div
+            className={
+              "nav-tab " + (this.state.selectedTab === "interviewPrep" && "selected-nav-tab")
+            }
+            onClick={() => this.changeTab("interviewPrep")}
+          >
+            Interview Prep
+          </div>
         </nav>
-        <div>
-          {applications.map((application, i) => (
-            <div
-              // className="navpath-list navpath-list-enabled"
-              key={application.id}
-              // onClick={() => this.props.getNavRoute(x.id)}
-            >
-              <h1>{application.company_name}</h1>
-              {application.application_link}
-              {application.office_address}
-            </div>
-          ))}
-        </div>
+        {this.state.selectedTab === "applications" && <Applications applications={applications} />}
+        {this.state.selectedTab === "interviewPrep" && <InterviewPrep />}
       </div>
     );
   }

@@ -1,8 +1,15 @@
-import { SET_APPLICATIONS, POST_APPLICATION, PUT_APPLICATION, DELETE_APPLICATION } from "../types";
+import {
+  SET_APPLICATIONS,
+  SET_APPLICATION_SEARCH,
+  // POST_APPLICATION,
+  // PUT_APPLICATION,
+  // DELETE_APPLICATION,
+} from "../types";
 
 const initialState = {
+  all_applications: [],
   applications: [],
-  // matchingSearchApplications: [],
+  searchTerm: "",
 };
 
 // export functions
@@ -13,7 +20,19 @@ export const applicationReducer = (state = initialState, action) => {
       return {
         ...state,
         applications: action.payload,
-        loading: false,
+        all_applications: action.payload,
+      };
+    case SET_APPLICATION_SEARCH:
+      let searchTerm = action.payload.trim().toLowerCase();
+      return {
+        ...state,
+        searchTerm: searchTerm,
+        applications: state.all_applications.filter(
+          (application) =>
+            application.company_name.toLowerCase().includes(searchTerm) ||
+            application.job_role.toLowerCase().includes(searchTerm) ||
+            application.office_address.toLowerCase().includes(searchTerm)
+        ),
       };
     // case POST_APPLICATION:
     //   return {
@@ -36,15 +55,6 @@ export const applicationReducer = (state = initialState, action) => {
     //     ...state,
     //     applications: state.applications.filter(
     //       (application) => application.id !== deletedApplicationId
-    //     ),
-    //     loading: false,
-    //   };
-    // case SEARCH_CONTACTS:
-    //   const searchTerm = action.payload;
-    //   return {
-    //     ...state,
-    //     matchingSearchContacts: state.contacts.filter((contact) =>
-    //       contact.name.toLowerCase().includes(searchTerm.trim().toLowerCase())
     //     ),
     //     loading: false,
     //   };

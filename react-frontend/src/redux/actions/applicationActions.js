@@ -1,31 +1,21 @@
-import { SET_APPLICATIONS, POST_APPLICATION, PUT_APPLICATION, DELETE_APPLICATION } from "../types";
-
-import { setError, setLoadingAction, stopLoadingAction } from "./uiActions";
+import {
+  SET_APPLICATIONS,
+  SET_APPLICATION_SEARCH,
+  // POST_APPLICATION,
+  // PUT_APPLICATION,
+  // DELETE_APPLICATION,
+} from "../types";
 
 import axios from "axios";
 
-// export const getApplications = () => (dispatch) => {
-//   dispatch(setLoadingAction(SET_APPLICATIONS));
-//   return axios
-//     .get(`/applications`)
-//     .then((res) => {
-//       dispatch({
-//         type: SET_APPLICATIONS,
-//         payload: res.data,
-//       });
-//       console.log(res.data);
-//       return res;
-//     })
-//     .then(() => {
-//       dispatch(stopLoadingAction(SET_APPLICATIONS));
-//     })
-//     .catch((err) => {
-//       dispatch(setError(SET_APPLICATIONS, err));
-//     });
-// };
+export const setApplicationSearch = (searchTerm) => (dispatch) => {
+  dispatch({
+    type: SET_APPLICATION_SEARCH,
+    payload: searchTerm,
+  });
+};
 
 export const getApplications = (userId) => (dispatch) => {
-  dispatch(setLoadingAction(SET_APPLICATIONS));
   return axios
     .get(`/applications/${userId}`)
     .then((res) => {
@@ -33,14 +23,10 @@ export const getApplications = (userId) => (dispatch) => {
         type: SET_APPLICATIONS,
         payload: res.data,
       });
-      console.log(res.data);
       return res;
     })
-    .then(() => {
-      dispatch(stopLoadingAction(SET_APPLICATIONS));
-    })
     .catch((err) => {
-      dispatch(setError(SET_APPLICATIONS, err));
+      console.log(err);
     });
 };
 
