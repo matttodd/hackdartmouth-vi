@@ -1,7 +1,15 @@
-import { SET_APPLICATIONS, POST_APPLICATION, PUT_APPLICATION, DELETE_APPLICATION } from "../types";
+import {
+  SET_APPLICATIONS,
+  SET_APPLICATION_SEARCH,
+  POST_APPLICATION,
+  PUT_APPLICATION,
+  DELETE_APPLICATION,
+} from "../types";
 
 const initialState = {
+  all_applications: [],
   applications: [],
+  searchTerm: "",
   // matchingSearchApplications: [],
 };
 
@@ -10,10 +18,21 @@ export const applicationReducer = (state = initialState, action) => {
   switch (action.type) {
     // applications
     case SET_APPLICATIONS:
+      console.log(state.applications);
+      console.log(state.searchTerm);
       return {
         ...state,
         applications: action.payload,
-        loading: false,
+        all_applications: action.payload,
+      };
+    case SET_APPLICATION_SEARCH:
+      let searchTerm = action.payload.trim().toLowerCase();
+      return {
+        ...state,
+        searchTerm: searchTerm,
+        applications: state.all_applications.filter((application) =>
+          application.company_name.toLowerCase().includes(searchTerm)
+        ),
       };
     // case POST_APPLICATION:
     //   return {

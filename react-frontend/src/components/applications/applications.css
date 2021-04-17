@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro");
+
+.container {
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+/* ============================================================================================== */
+/* HEADER STYLES */
+/* ============================================================================================== */
+.applications-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 910px;
+  border-bottom: 1px solid #edeff1;
+  margin-top: 40px;
+  padding-bottom: 20px;
+}
+
+.applications-name {
+  color: #d2d2d2;
+  font-size: 15pt;
+}
+
+.applications-progress-list {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.applications-progress-list > li {
+  padding-right: 2em;
+}
+
+.application-progress-stat {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.offers-stat {
+  color: black;
+}
+
+.interviews-stat {
+  color: #8c8c8c;
+}
+
+.applications-stat {
+  color: #d2d2d2;
+}
+
+.progress-stat-num {
+  font-size: 30pt;
+  margin: 0 10px 0 0;
+}
+
+.progress-stat-label {
+  margin: 0;
+  width: 90px;
+}
+
+/* ============================================================================================== */
+/* LIST STYLES */
+/* ============================================================================================== */
+
+.applications-list {
+  margin-top: 25px;
+}
+
+.application-section {
+}
+
+.application-section-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid #edeff1;
+  background-color: #e9f2ff;
+  padding: 0 1em;
+}
+
+.application-section-title {
+  color: #303030;
+}
+
+.application-section-date-label {
+  color: #303030;
+}
+
+.application-section-list {
+  padding: 0;
+  margin: 0;
+}
+
+.application-row {
+  display: flex;
+  font-size: 1em;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 0.5em;
+  border-bottom: 1px solid #edeff1;
+}
+
+.application-company-location-position {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+}
+
+.application-company-location .application-position {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 300px;
+  margin: 0;
+}
+
+.application-company-location {
+  width: 300px;
+}

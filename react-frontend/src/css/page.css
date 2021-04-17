@@ -18,5 +18,15 @@
 }
 
 .nav-tab {
+  width: 160px;
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+  color: #858484;
+  border-bottom: 1px solid #EDEFF1;
+}
 
+.selected-nav-tab {
+  color: black;
+  border-bottom: 1px solid black;
 }
