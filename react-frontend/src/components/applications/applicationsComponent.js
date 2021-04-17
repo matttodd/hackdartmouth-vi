@@ -20,12 +20,29 @@ class Applications extends Component {
   // search change
   handleChange = (event) => {
     const value = event.target.value.trim();
-    console.log(value);
     this.props.setApplicationSearch(value);
   };
 
   render() {
-    const { applications, searchTerm } = this.props.applications;
+    const { all_applications, applications, searchTerm } = this.props.applications;
+    let all_offers = [];
+    let all_interviews = [];
+    let all_applied = [];
+    all_applications.forEach((application) => {
+      switch (application.application_status) {
+        case "offer":
+          all_offers.push(application);
+          break;
+        case "interview":
+          all_interviews.push(application);
+          break;
+        case "applied":
+        default:
+          all_applied.push(application);
+          break;
+      }
+    });
+
     let offers = [];
     let interviews = [];
     let applied = [];
@@ -49,35 +66,48 @@ class Applications extends Component {
         <div className="applications-header">
           <h2 className="applications-name">Summer '21 Internships</h2>
           <ul className="applications-progress-list">
-            <li className="application-progress-stat offers-stat">
-              <p className="progress-stat-num">2</p>
-              <p className="progress-stat-label">offers received</p>
-            </li>
-            <li className="application-progress-stat interviews-stat">
-              <p className="progress-stat-num">9</p>
-              <p className="progress-stat-label">interviews completed</p>
-            </li>
-            <li className="application-progress-stat applications-stat">
-              <p className="progress-stat-num">69</p>
-              <p className="progress-stat-label">applications submitted</p>
-            </li>
+            {all_offers.length > 0 && (
+              <li className="application-progress-stat offers-stat">
+                <p className="progress-stat-num">{all_offers.length}</p>
+                <p className="progress-stat-label">offers received</p>
+              </li>
+            )}
+            {all_interviews.length > 0 && (
+              <li className="application-progress-stat interviews-stat">
+                <p className="progress-stat-num">{all_interviews.length}</p>
+                <p className="progress-stat-label">interviews completed</p>
+              </li>
+            )}
+            {all_applied.length > 0 && (
+              <li className="application-progress-stat applications-stat">
+                <p className="progress-stat-num">{all_applied.length}</p>
+                <p className="progress-stat-label">applications submitted</p>
+              </li>
+            )}
           </ul>
           <input
+            className="application-search"
             type="text"
             value={searchTerm}
             placeholder="Search Applications"
             onChange={this.handleChange}
           />
         </div>
-        <div className="applications-list">
-          <SectionList sectionApplications={offers} sectionLabels={["Offers", "Deadline"]} />
-        </div>
-        <div className="applications-list">
-          <SectionList sectionApplications={interviews} sectionLabels={["Interviews", "Date"]} />
-        </div>
-        <div className="applications-list">
-          <SectionList sectionApplications={applied} sectionLabels={["Submitted", "Applied"]} />
-        </div>
+        {offers.length > 0 && (
+          <div className="applications-list">
+            <SectionList sectionApplications={offers} sectionLabels={["Offers", "Deadline"]} />
+          </div>
+        )}
+        {interviews.length > 0 && (
+          <div className="applications-list">
+            <SectionList sectionApplications={interviews} sectionLabels={["Interviews", "Date"]} />
+          </div>
+        )}
+        {applied.length > 0 && (
+          <div className="applications-list">
+            <SectionList sectionApplications={applied} sectionLabels={["Submitted", "Applied"]} />
+          </div>
+        )}
       </div>
     );
   }
