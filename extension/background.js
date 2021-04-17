@@ -1,22 +1,20 @@
-function startApplication(pageDOM) {
-  console.log(pageDOM);
-}
-
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  console.log(request);
-  if (request.msg == "trackApplication") {
-    chrome.tabs.getSelected(null, function (tab) {
-      // Now inject a script onto the page
-      chrome.tabs.executeScript(
-        tab.id,
-        {
-          code:
-            "chrome.extension.sendRequest({content: document.body.innerHTML}, function(response) { console.log('success'); });",
-        },
-        function (pageDOM) {
-          startApplication(pageDOM);
-        }
-      );
-    });
-  }
-});
+chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
+    // If the received message has the expected format...
+    console.log("posting")
+    if (msg.msg == 'sendPosting') {
+        // Call the specified callback, passing
+        // the web-page's DOM content as argument
+        console.log("request sent")
+        var xhttp = new XMLHttpRequest();
+        // xhttp.onreadystatechange = function() {
+        //      if (this.readyState == 4 && this.status == 200) {
+        //          alert(this.responseText);
+        //      }
+        // };
+        console.log(msg.body)
+        xhttp.open("POST", "https://todo-tq6kugb4ia-uc.a.run.app/applications/XYrpS0dU2ATb44u15KWy9qNfP9q1", true);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send(JSON.stringify(msg.body));
+        // sendResponse(document.body.innerHTML);
+    }
+  });

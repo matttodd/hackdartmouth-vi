@@ -7,7 +7,7 @@
             "matches": [
                 "<all_urls>"
             ],
-            "js": ["extension/content.js"]
+            "js": ["extension/third_party/jquery-3.6.0.slim.min.js", "extension/content.js"]
         }
     ],
     "background": {
@@ -17,5 +17,5 @@
         "default_icon": "extension/icon.png",
         "default_popup": "extension/popup.html"
     },
-    "permissions": ["activeTab"]
+    "permissions": ["activeTab", "tabs"]
 }
