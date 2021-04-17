@@ -15,6 +15,7 @@ import { getProfile } from "../redux/actions/profileActions";
 
 // Components
 import Applications from "../components/applications/applicationsComponent";
+import InterviewPrep from "../components/interviewPrep/interviewPrepComponent";
 
 // css styles
 import "../css/page.css";
@@ -28,6 +29,7 @@ class DashboardPage extends Component {
       profile: {
         name: "",
       },
+      selectedTab: "applications",
     };
   }
 
@@ -37,17 +39,15 @@ class DashboardPage extends Component {
     this.props.getProfile(userId);
   }
 
+  changeTab(tabName) {
+    this.setState({
+      selectedTab: tabName,
+    });
+  }
+
   render() {
-    // const { isAdmin } = this.props.user;
-    // const { errors, loadingActions } = this.props.ui;
     const { applications } = this.props.applications;
     const { profile } = this.props.profile;
-    // const floatAddButtonOptions = {
-    //   Department: this.handleAddorEditDepartment,
-    //   Contact: this.handleAddorEditContact,
-    // };
-    // console.log(applications);
-    // console.log(profile);
 
     return (
       <div className="container">
@@ -55,10 +55,25 @@ class DashboardPage extends Component {
           <h1 className="profile-name">{profile.name}</h1>
         </div>
         <nav className="nav-bar">
-          <div className="selected-nav-tab nav-tab">Applications</div>
-          <div className="nav-tab">Interview Prep</div>
+          <div
+            className={
+              "nav-tab " + (this.state.selectedTab === "applications" && "selected-nav-tab")
+            }
+            onClick={() => this.changeTab("applications")}
+          >
+            Applications
+          </div>
+          <div
+            className={
+              "nav-tab " + (this.state.selectedTab === "interviewPrep" && "selected-nav-tab")
+            }
+            onClick={() => this.changeTab("interviewPrep")}
+          >
+            Interview Prep
+          </div>
         </nav>
-        <Applications applications={applications} />
+        {this.state.selectedTab === "applications" && <Applications applications={applications} />}
+        {this.state.selectedTab === "interviewPrep" && <InterviewPrep />}
       </div>
     );
   }

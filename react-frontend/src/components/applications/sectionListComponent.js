@@ -45,7 +45,7 @@ class SectionList extends Component {
 }
 
 SectionList.propTypes = {
-  sectionApplications: PropTypes.object.isRequired,
+  sectionApplications: PropTypes.array.isRequired,
   sectionLabels: PropTypes.array.isRequired,
 };
 

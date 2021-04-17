@@ -23,7 +23,12 @@
   padding: 10px;
   margin: 10px;
   color: #858484;
-  border-bottom: 1px solid #EDEFF1;
+  border-bottom: 1px solid #edeff1;
+  cursor: pointer;
+}
+
+.nav-tab:hover {
+  color: black;
 }
 
 .selected-nav-tab {

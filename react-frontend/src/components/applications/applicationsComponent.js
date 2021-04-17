@@ -93,6 +93,9 @@ class Applications extends Component {
             onChange={this.handleChange}
           />
         </div>
+        {offers.length === 0 && interviews.length === 0 && applied.length === 0 && (
+          <div>Search better bitch</div>
+        )}
         {offers.length > 0 && (
           <div className="applications-list">
             <SectionList sectionApplications={offers} sectionLabels={["Offers", "Deadline"]} />
