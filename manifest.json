@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "name": "CareerArchitech",
+    "name": "jobarchi.tech",
     "version": "1.0",
     "content_scripts": [
         {
