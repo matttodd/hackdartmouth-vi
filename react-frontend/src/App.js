@@ -19,8 +19,8 @@ import DashboardPage from "./pages/dashboardPage";
 // import logout from "./pages/logout";
 
 // axios.defaults.withCredentials = true;
-axios.defaults.baseURL = "http://127.0.0.1:5000";
-// axios.defaults.baseURL = "https://todo-tq6kugb4ia-uc.a.run.app";
+// axios.defaults.baseURL = "http://127.0.0.1:5000";
+axios.defaults.baseURL = "https://todo-tq6kugb4ia-uc.a.run.app";
 
 // Authentication
 // const hasValidCookie = localStorage.hasValidCookie;
