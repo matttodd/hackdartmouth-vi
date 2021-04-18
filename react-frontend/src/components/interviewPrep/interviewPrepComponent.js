@@ -93,13 +93,17 @@ class InterviewPrep extends Component {
               <h3 className="qa-section-label">Your response:</h3>
               <div className="record-button-container">
                 {!this.state.isRecording ? (
-                  <button className="record-button" onClick={() => this.startRecording()}>
-                    Record
-                  </button>
+                  <>
+                    <button className="record-button notRec" onClick={() => this.startRecording()}>
+                    </button>
+                    <p>Record</p>
+                  </>
                 ) : (
-                  <button className="record-button" onClick={() => this.stopRecording()}>
-                    Stop
-                  </button>
+                  <>
+                    <button className="record-button Rec" onClick={() => this.stopRecording()}>
+                    </button>
+                    <p>Stop</p>
+                  </>
                 )}
               </div>
             </div>
