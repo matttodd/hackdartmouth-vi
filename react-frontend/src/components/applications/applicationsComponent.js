@@ -97,7 +97,7 @@ class Applications extends Component {
           </div>
         </div>
         {offers.length === 0 && interviews.length === 0 && applied.length === 0 && (
-          <div>Search better bitch</div>
+          <div>No Search Results</div>
         )}
         {offers.length > 0 && (
           <div className="applications-list">
