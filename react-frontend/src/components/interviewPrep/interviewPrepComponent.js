@@ -95,8 +95,8 @@ class InterviewPrep extends Component {
               <h3 className="qa-section-label">Job Role:</h3>
             </div>
             <select className="qa-text role-selection" name="role" id="role">
-              <option value="product-manager">Product Manager</option>
               <option value="software-engineer">Software Engineer</option>
+              <option value="product-manager">Product Manager</option>
               <option value="designers">Designer</option>
             </select>
             <div className="qa-section-header">
@@ -142,7 +142,8 @@ class InterviewPrep extends Component {
             </div>
           </div>
         </section>
-        {response_string.length > 0 && (
+        {/* {response_string.length > 0 && ( */}
+        {true && (
           <section className="interview-qa">
             <div className="interview-qa-section">
               <h3 className="qa-section-label">Analysis</h3>
@@ -152,29 +153,68 @@ class InterviewPrep extends Component {
               <ul className="card-row">
                 <li className="analysis-card">
                   <h3 className="card-title">General Enthusiam</h3>
-                  {sentiment_score < 25 && <p>You suck</p>}
-                  {25 <= sentiment_score && sentiment_score < 50 && <p>Kinda Negative</p>}
-                  {50 <= sentiment_score && sentiment_score < 75 && <p>Not Bad</p>}
-                  {75 <= sentiment_score && <p>Great!</p>}
+                  {sentiment_score < 25 && (
+                    <div className="bad-box">
+                      <p className="feedback">Bad</p>
+                    </div>
+                  )}
+                  {50 <= sentiment_score && sentiment_score < 65 && (
+                    <div className="ok-box">
+                      <p className="feedback">Ok</p>
+                    </div>
+                  )}
+                  {65 <= sentiment_score && (
+                    <div className="good-box">
+                      <p className="feedback">Good</p>
+                    </div>
+                  )}
 
-                  {sentiment_score}
+                  <p>Sentiment score: {sentiment_score}</p>
+                  <p>Try to start and end your responses on a positive note!</p>
                 </li>
                 <li className="analysis-card">
                   <h3 className="card-title">Response Length</h3>
-                  {duration_score < 25 && <p>Very Negative</p>}
-                  {25 <= duration_score && duration_score < 50 && <p>Kinda Negative</p>}
-                  {50 <= duration_score && duration_score < 75 && <p>Not Bad</p>}
-                  {75 <= duration_score && <p>Great!</p>}
-
-                  <p>{raw_duration} seconds</p>
+                  {duration_score < 25 && (
+                    <div className="bad-box">
+                      <p className="feedback">Bad</p>
+                    </div>
+                  )}
+                  {50 <= duration_score && duration_score < 65 && (
+                    <div className="ok-box">
+                      <p className="feedback">Ok</p>
+                    </div>
+                  )}
+                  {65 <= duration_score && (
+                    <div className="good-box">
+                      <p className="feedback">Good</p>
+                    </div>
+                  )}
+                  <p>Duration: {raw_duration} seconds.</p>
+                  <p>Keep your answers short and concise - between 30s to 2min!</p>
                 </li>
                 <li className="analysis-card">
                   <h3 className="card-title">Talking Speed</h3>
-                  {word_density_score < 25 && <p>Very Negative</p>}
-                  {25 <= word_density_score && word_density_score < 50 && <p>Kinda Negative</p>}
-                  {50 <= word_density_score && word_density_score < 75 && <p>Not Bad</p>}
-                  {75 <= word_density_score && <p>Perfect!</p>}
-                  <p>{raw_wpm} WPM</p>
+                  {/* {word_density_score < 25 && <p>Very Bad</p>}
+                  {25 <= word_density_score && word_density_score < 50 && <p>Bad</p>}
+                  {50 <= word_density_score && word_density_score < 75 && <p>OK</p>}
+                  {75 <= word_density_score && <p>Good</p>} */}
+                  {word_density_score < 25 && (
+                    <div className="bad-box">
+                      <p className="feedback">Bad</p>
+                    </div>
+                  )}
+                  {50 <= word_density_score && word_density_score < 65 && (
+                    <div className="ok-box">
+                      <p className="feedback">Ok</p>
+                    </div>
+                  )}
+                  {65 <= word_density_score && (
+                    <div className="good-box">
+                      <p className="feedback">Good</p>
+                    </div>
+                  )}
+                  <p>Your WPM: {raw_wpm}</p>
+                  <p>Use a moderate pace when speaking.</p>
                 </li>
               </ul>
             </div>

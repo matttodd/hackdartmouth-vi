@@ -129,3 +129,23 @@
   font-size: 24pt;
   color: #858484;
 }
+
+.feedback {
+
+}
+
+.ok-box .good-box {
+  padding: 2px;
+}
+
+.ok-box {
+  background-color: #FCFFE9;
+}
+
+.good-box {
+  background-color: #EAFFE9;
+}
+
+.bad-box {
+  background-color: #F4D9D6;
+}
