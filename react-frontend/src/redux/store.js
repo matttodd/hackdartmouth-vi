@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 
 import { userReducer } from "./reducers/userReducer";
 import { applicationReducer } from "./reducers/applicationReducer";
+import { interviewReducer } from "./reducers/interviewReducer";
 import { profileReducer } from "./reducers/profileReducer";
 import { uiReducer } from "./reducers/uiReducer";
 
@@ -14,6 +15,7 @@ const reducers = combineReducers({
   user: userReducer,
   // contacts: contactReducer,
   applications: applicationReducer,
+  interviews: interviewReducer,
   profile: profileReducer,
   ui: uiReducer,
 });
