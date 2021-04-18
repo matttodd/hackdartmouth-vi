@@ -2,4 +2,38 @@
 
 .container {
   font-family: "Source Sans Pro", sans-serif;
+  width: 100%;
+}
+
+.interview-qa {
+  border-bottom: 1px solid #edeff1;
+  width: 100%;
+  max-width: 780px;
+}
+
+.interview-qa-section {
+  margin-bottom: 50px;
+}
+
+.qa-section-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.qa-section-label {
+  color: #d2d2d2;
+  font-size: 15pt;
+}
+
+.qa-text {
+  color: #858484;
+  font-size: 15pt;
+}
+
+.record-button-container {
+}
+
+.record-button {
+  
 }

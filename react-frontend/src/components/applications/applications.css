@@ -89,9 +89,15 @@
   background-color: #fcffe9;
 }
 
+.application-section-title-chunk {
+  display: flex;
+  align-items: center;
+}
+
 .application-section-title {
   /* color: #303030; */
-  margin: 0.5em 0;
+
+  margin: 0.5em;
 }
 
 .application-section-date-label {
@@ -138,11 +144,13 @@ button {
   justify-content: space-between;
   padding: 0 0.5em;
   border-bottom: 1px solid #edeff1;
+  margin: 0 0.5em;
 }
 
 .application-company-location-position {
   display: flex;
   flex-direction: row;
+  align-items: center;
   margin: 0;
 }
 
@@ -155,6 +163,7 @@ button {
 }
 
 .application-company-location {
+  margin-left: 0.5em;
   width: 350px;
 }
 

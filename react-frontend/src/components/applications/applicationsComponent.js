@@ -85,15 +85,15 @@ class Applications extends Component {
               </li>
             )}
           </ul>
-          <div class="searchAndAdd">
-          <input
-            className="application-search"
-            type="text"
-            value={searchTerm}
-            placeholder="🔍 Search Applications"
-            onChange={this.handleChange}
-          />
-          <button> + Application to track </button>
+          <div className="searchAndAdd">
+            <input
+              className="application-search"
+              type="text"
+              value={searchTerm}
+              placeholder="🔍 Search Applications"
+              onChange={this.handleChange}
+            />
+            <button> + Application to track </button>
           </div>
         </div>
         {offers.length === 0 && interviews.length === 0 && applied.length === 0 && (

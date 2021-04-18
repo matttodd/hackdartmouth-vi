@@ -6,38 +6,30 @@ import * as RecordRTC from "recordrtc";
 import { postInterviewResponse } from "../../redux/actions/interviewActions";
 import { connect } from "react-redux";
 
-import axios from "axios";
 // css styles
 import "./interviewPrep.css";
 
 var recordAudioThing;
-var recordAudioFiles;
 
 class InterviewPrep extends Component {
   constructor() {
     super();
-    this.state = {};
-    this.stopRecording = this.stopRecording.bind(this);
+    this.state = { isRecording: false };
+    // this.stopRecording = this.stopRecording.bind(this);
   }
 
-  // search change
-  handleChange = (event) => {
-    const value = event.target.value.trim();
-    // this.props.setApplicationSearch(value);
-  };
+  startRecording() {
+    this.setState({
+      isRecording: true,
+    });
 
-  //3)
-  startRecording(recordAudio) {
-    // startRecording.disabled = true;
-
-    //4)
     navigator.getUserMedia(
       {
         audio: true,
       },
       function (stream) {
         //5)
-        recordAudio = RecordRTC(stream, {
+        let recordAudio = RecordRTC(stream, {
           type: "audio",
 
           //6)
@@ -56,8 +48,6 @@ class InterviewPrep extends Component {
         });
 
         recordAudio.startRecording();
-        // stopRecording.disabled = false;
-        console.log(recordAudio);
         recordAudioThing = recordAudio;
       },
       function (error) {
@@ -67,15 +57,12 @@ class InterviewPrep extends Component {
   }
 
   stopRecording = (e) => {
-    // recording stopped
-    // startRecording.disabled = false;
-    // stopRecording.disabled = true;
-    console.log(recordAudioThing);
-    // stop audio recorder
+    this.setState({
+      isRecording: false,
+    });
     recordAudioThing.stopRecording(() => {
       // after stopping the audio, get the audio data
-      recordAudioThing.getDataURL(function (audioDataURL) {
-        //2)
+      recordAudioThing.getDataURL((audioDataURL) => {
         var files = {
           audio: {
             type: recordAudioThing.getBlob().type || "audio/wav",
@@ -83,42 +70,47 @@ class InterviewPrep extends Component {
           },
         };
         // submit the audio file to the server
-        // socketio.emit("message", files);
-        // console.log(files.audio.dataURL);
-        // recordAudioFiles = files;
-        let formData = new FormData();
-        // formData.append("image", imagefile.files[0]);
-        formData.append("audio", files.audio.dataURL);
-        return axios.post(`/interviews/speech2txt`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
+        this.props.postInterviewResponse(files.audio.dataURL);
       });
     });
-    // this.props.postInterviewResponse(recordAudioFiles);
   };
 
   render() {
     //medium.com/google-cloud/building-a-client-side-web-app-which-streams-audio-from-a-browser-microphone-to-a-server-part-ii-df20ddb47d4e
-    //1)
-    // const startRecording = document.getElementById("start-recording");
-    // const stopRecording = document.getElementById("stop-recording");
-
-    //2)
-    var recordAudio;
-    const io = require("socket.io");
-    const socketio = io();
-    const socket = socketio.on("connect", function () {
-      // startRecording.disabled = false;
-      console.log("Connected");
-    });
+    const { response_string } = this.props.interviews;
 
     return (
-      <div>
-        <button onClick={() => this.startRecording(recordAudio)}>Start Recording</button>
-        <button onClick={() => this.stopRecording()}>Stop Recording</button>
-        {/* <textarea id="results" style="width: 800px; height: 300px;"></textarea> */}
+      <div className="container">
+        <section className="interview-qa">
+          <div className="interview-qa-section">
+            <div className="qa-section-header">
+              <h3 className="qa-section-label">Question:</h3>
+            </div>
+            <p className="qa-text">Describe a time you ate shit.</p>
+          </div>
+          <div className="interview-qa-section">
+            <div className="qa-section-header">
+              <h3 className="qa-section-label">Your response:</h3>
+              <div className="record-button-container">
+                {!this.state.isRecording ? (
+                  <button className="record-button" onClick={() => this.startRecording()}>
+                    Record
+                  </button>
+                ) : (
+                  <button className="record-button" onClick={() => this.stopRecording()}>
+                    Stop
+                  </button>
+                )}
+              </div>
+            </div>
+            {response_string.length > 0 && <p className="qa-text">{response_string}</p>}
+          </div>
+        </section>
+        <section className="interview-qa">
+          <div className="interview-qa-section">
+            <h3 className="qa-section-label">Analysis</h3>
+          </div>
+        </section>
       </div>
     );
   }
@@ -129,7 +121,7 @@ InterviewPrep.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  return {};
+  return { interviews: state.interviews };
 };
 
 export default connect(mapStateToProps, { postInterviewResponse })(InterviewPrep);
