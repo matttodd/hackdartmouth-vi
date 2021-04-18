@@ -19,7 +19,7 @@ class SectionList extends Component {
     return (
       <section className="application-section">
         <div className="application-section-header">
-          <h3 className="application-section-title">{this.props.sectionLabels[0]}</h3>
+          <h3 className="application-section-title">▴ {this.props.sectionLabels[0]}</h3>
           <h3 className="application-section-date-label">{this.props.sectionLabels[1]}</h3>
         </div>
         <ul className="application-section-list">
