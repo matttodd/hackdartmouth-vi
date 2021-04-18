@@ -1,4 +1,4 @@
-import { POST_INTERVIEW_RESPONSE } from "../types";
+import { POST_INTERVIEW_RESPONSE, SET_INTERVIEW_ANALYSIS } from "../types";
 
 import axios from "axios";
 

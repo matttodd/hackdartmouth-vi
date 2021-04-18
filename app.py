@@ -150,15 +150,14 @@ def get_profile(user_id):
 
 
 # GCLOUD ENDPOINTS
-@app.route("/interviews/nlp", methods=["GET"])
-@cross_origin()
-def get_nlp_analysis():
+# @app.route("/interviews/nlp", methods=["GET"])
+# @cross_origin()
+def get_nlp_analysis(text):
     """
     Get NLP analysis
     """
     try:
         # The text to analyze
-        text = "I sure do love working at Google. It is a really cool place! In my opinion, everyone should work at Google. Anyone who doesn't work at Google must be wasting their time! Imagine working somewhere lame like Capital One HAHA!"
         document = language_v1.Document(
             content=text, type_=language_v1.Document.Type.PLAIN_TEXT
         )
@@ -182,44 +181,37 @@ def get_nlp_analysis():
             }
         )
 
-        # entities = everything.entities
-        tokens = everything.tokens
-        print(tokens[0].part_of_speech)
+        # # entities = everything.entities
+        # tokens = everything.tokens
+        # # print(tokens[1])
         # for token in tokens:
         #     print(token)
-        # verbs = [e for e in entities if e.type_ == "verb"]
-        # tokens {
-        #     text {
-        #         content: "love"
-        #         begin_offset: -1
-        #     }
-        #     part_of_speech {
-        #         tag: VERB
-        #     }
 
         # calculate overall score
+        sentiment_score = int((sentiment.score + 1) * 50)
         overall_score = (
             sum(
                 [
-                    (sentiment.score + 1) * 5,
+                    sentiment_score,
                     duration_score(),
                     word_density_score(text),
                 ]
             )
             / 3
         )
-        overall_percentage = int(overall_score * 10)
+        # overall_percentage = int(overall_score * 10)
 
         nlp_analysis = {
             "text": text,
-            "sentiment_score": sentiment.score,
+            "sentiment_score": sentiment_score,
             "sentiment_magnitude": sentiment.magnitude,
             "duration_score": duration_score(),
             "word_density_score": word_density_score(text),
-            "overall_score": overall_percentage,
+            "overall_score": int(overall_score),
         }
 
-        return jsonify(nlp_analysis), 200
+        # return jsonify(nlp_analysis), 200
+        return nlp_analysis
     except Exception as e:
         print(e)
         return f"An Error Occured: {e}"
@@ -259,7 +251,14 @@ def get_speech_from_text():
             responses.append(result.alternatives[0].transcript)
             print("Transcript: {}".format(result.alternatives[0].transcript))
 
-        return jsonify(responses), 200
+        # return jsonify(" ".join(responses)), 200
+        text = " ".join(responses)
+        print(text)
+        # text =
+        text = "I sure do love working at Google. It is a really cool place! In my opinion, everyone should work at Google. Anyone who doesn't work at Google must be wasting their time! Imagine working somewhere lame like Capital One HAHA!"
+        analysis = get_nlp_analysis(text)
+        print(analysis)
+        return jsonify(analysis), 200
     except Exception as e:
         print(e)
         return f"An Error Occured: {e}"
