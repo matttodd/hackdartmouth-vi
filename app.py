@@ -258,6 +258,7 @@ def get_speech_from_text():
         print(text)
         # text =
         # text = "I sure do love working at Google. It is a really cool place! In my opinion, everyone should work at Google. Anyone who doesn't work at Google must be wasting their time! Imagine working somewhere lame like Amazon HAHA!"
+        text = "In a team of 4, I participated in HackDartmouth and served as my team’s designer. With a chrome extension and web app, jobarchi.tech was created to help manage job applications and interview prep. As a team, we won 1st place at the Hackathon."
         analysis = get_nlp_analysis(text)
         print(analysis)
         return jsonify(analysis), 200
