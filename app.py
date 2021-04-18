@@ -256,7 +256,6 @@ def get_speech_from_text():
         # return jsonify(" ".join(responses)), 200
         text = " ".join(responses)
         print(text)
-        # text =
         analysis = get_nlp_analysis(text)
         print(analysis)
         return jsonify(analysis), 200

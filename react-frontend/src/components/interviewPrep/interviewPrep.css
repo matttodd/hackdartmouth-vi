@@ -149,3 +149,8 @@
 .bad-box {
   background-color: #F4D9D6;
 }
+
+.help-me {
+  padding-top: 20px;
+  width: 500px;
+}

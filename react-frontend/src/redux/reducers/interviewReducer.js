@@ -20,11 +20,15 @@ export const interviewReducer = (state = initialState, action) => {
     // applications
     case POST_INTERVIEW_RESPONSE:
       console.log(action.payload);
-      return {
-        ...state,
-        // response_string: action.payload,
-        analysis: action.payload,
-      };
+      let test_analysis = action.payload;
+      if (typeof test_analysis.text !== "undefined") {
+        return {
+          ...state,
+          analysis: action.payload,
+        };
+      } else {
+        return state;
+      }
     case SET_INTERVIEW_ANALYSIS:
       return {
         ...state,

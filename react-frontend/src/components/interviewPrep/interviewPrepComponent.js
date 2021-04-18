@@ -127,6 +127,7 @@ class InterviewPrep extends Component {
                       >
                         Record
                       </button>
+                      <p className="help-me">Analysis requires 2+ sentences.</p>
                     </>
                   ) : (
                     <>
@@ -142,8 +143,7 @@ class InterviewPrep extends Component {
             </div>
           </div>
         </section>
-        {/* {response_string.length > 0 && ( */}
-        {true && (
+        {response_string.length > 0 && (
           <section className="interview-qa">
             <div className="interview-qa-section">
               <h3 className="qa-section-label">Analysis</h3>
@@ -194,10 +194,6 @@ class InterviewPrep extends Component {
                 </li>
                 <li className="analysis-card">
                   <h3 className="card-title">Talking Speed</h3>
-                  {/* {word_density_score < 25 && <p>Very Bad</p>}
-                  {25 <= word_density_score && word_density_score < 50 && <p>Bad</p>}
-                  {50 <= word_density_score && word_density_score < 75 && <p>OK</p>}
-                  {75 <= word_density_score && <p>Good</p>} */}
                   {word_density_score < 25 && (
                     <div className="bad-box">
                       <p className="feedback">Bad</p>
