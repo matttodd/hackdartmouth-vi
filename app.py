@@ -168,29 +168,56 @@ def get_nlp_analysis():
             request={"document": document}
         ).document_sentiment
 
+        # verb stuff
+        everything = nlp_client.annotate_text(
+            request={
+                "document": document,
+                "features": {
+                    "extract_syntax": True,
+                    "extract_entities": True,
+                    "extract_document_sentiment": False,
+                    "extract_entity_sentiment": False,
+                    "classify_text": True,
+                },
+            }
+        )
+
+        # entities = everything.entities
+        tokens = everything.tokens
+        print(tokens[0].part_of_speech)
+        # for token in tokens:
+        #     print(token)
+        # verbs = [e for e in entities if e.type_ == "verb"]
+        # tokens {
+        #     text {
+        #         content: "love"
+        #         begin_offset: -1
+        #     }
+        #     part_of_speech {
+        #         tag: VERB
+        #     }
+
+        # calculate overall score
+        overall_score = (
+            sum(
+                [
+                    (sentiment.score + 1) * 5,
+                    duration_score(),
+                    word_density_score(text),
+                ]
+            )
+            / 3
+        )
+        overall_percentage = int(overall_score * 10)
+
         nlp_analysis = {
             "text": text,
             "sentiment_score": sentiment.score,
             "sentiment_magnitude": sentiment.magnitude,
             "duration_score": duration_score(),
             "word_density_score": word_density_score(text),
+            "overall_score": overall_percentage,
         }
-
-        # everything = nlp_client.annotate_text(
-        #     request={
-        #         "document": document,
-        #         "features": {
-        #             "extract_syntax": False,
-        #             "extract_entities": True,
-        #             "extract_document_sentiment": False,
-        #             "extract_entity_sentiment": False,
-        #             "classify_text": True,
-        #         },
-        #     }
-        # )
-
-        # print(nlp_analysis)
-        # print(everything)
 
         return jsonify(nlp_analysis), 200
     except Exception as e:
@@ -303,25 +330,25 @@ def word_density_score(text):
     words = len(text.split())
     words_per_minute = words / (get_wave_duration() / 60)
     if words_per_minute < 100:
-        return 10 * (words_per_minute / 100)
+        return int(100 * (words_per_minute / 100))
     elif words_per_minute > 150 and words_per_minute < 250:
-        return 10 * (250 - words_per_minute) / 100
+        return int(100 * (250 - words_per_minute) / 100)
     elif words_per_minute >= 250:
         return 0
     else:
-        return 10
+        return 100
 
 
 def duration_score():
     duration = get_wave_duration()
     if duration < 30:
-        return 10 * (duration / 30)
+        return int(100 * (duration / 30))
     elif duration > 120 and duration < 300:
-        return 10 * (300 - duration) / 180
+        return int(100 * (300 - duration) / 180)
     elif duration >= 300:
         return 0
     else:
-        return 10
+        return 100
 
 
 def get_wave_duration():
