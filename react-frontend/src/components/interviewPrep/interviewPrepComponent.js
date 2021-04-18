@@ -80,10 +80,12 @@ class InterviewPrep extends Component {
     const { analysis } = this.props.interviews;
     let response_string = analysis.text;
     let duration_score = analysis.duration_score;
-    let sentiment_magnitude = analysis.sentiment_magnitude;
+    // let sentiment_magnitude = analysis.sentiment_magnitude;
     let sentiment_score = analysis.sentiment_score;
     let word_density_score = analysis.word_density_score;
     let overall_score = analysis.overall_score;
+    let raw_duration = analysis.raw_duration;
+    let raw_wpm = analysis.raw_wpm;
 
     return (
       <div className="container">
@@ -144,19 +146,35 @@ class InterviewPrep extends Component {
           <section className="interview-qa">
             <div className="interview-qa-section">
               <h3 className="qa-section-label">Analysis</h3>
-              <p>{`Overal Score: ${overall_score} / 100`}</p>
+              <div className="overall-score-container">
+                <p className="overall-score">{`Overall Score: ${overall_score} / 100`}</p>
+              </div>
               <ul className="card-row">
                 <li className="analysis-card">
-                  <h3 className="card-title">General Sentiment</h3>
-                  <p>{sentiment_score}</p>
+                  <h3 className="card-title">General Enthusiam</h3>
+                  {sentiment_score < 25 && <p>You suck</p>}
+                  {25 <= sentiment_score && sentiment_score < 50 && <p>Kinda Negative</p>}
+                  {50 <= sentiment_score && sentiment_score < 75 && <p>Not Bad</p>}
+                  {75 <= sentiment_score && <p>Great!</p>}
+
+                  {sentiment_score}
                 </li>
                 <li className="analysis-card">
                   <h3 className="card-title">Response Length</h3>
-                  <p>{duration_score}</p>
+                  {duration_score < 25 && <p>Very Negative</p>}
+                  {25 <= duration_score && duration_score < 50 && <p>Kinda Negative</p>}
+                  {50 <= duration_score && duration_score < 75 && <p>Not Bad</p>}
+                  {75 <= duration_score && <p>Great!</p>}
+
+                  <p>{raw_duration} seconds</p>
                 </li>
                 <li className="analysis-card">
                   <h3 className="card-title">Talking Speed</h3>
-                  <p>{word_density_score}</p>
+                  {word_density_score < 25 && <p>Very Negative</p>}
+                  {25 <= word_density_score && word_density_score < 50 && <p>Kinda Negative</p>}
+                  {50 <= word_density_score && word_density_score < 75 && <p>Not Bad</p>}
+                  {75 <= word_density_score && <p>Perfect!</p>}
+                  <p>{raw_wpm} WPM</p>
                 </li>
               </ul>
             </div>

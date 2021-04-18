@@ -208,6 +208,8 @@ def get_nlp_analysis(text):
             "duration_score": duration_score(),
             "word_density_score": word_density_score(text),
             "overall_score": int(overall_score),
+            "raw_wpm": int(words_per_minute(text)),
+            "raw_duration": int(get_wave_duration()),
         }
 
         # return jsonify(nlp_analysis), 200
@@ -255,7 +257,7 @@ def get_speech_from_text():
         text = " ".join(responses)
         print(text)
         # text =
-        text = "I sure do love working at Google. It is a really cool place! In my opinion, everyone should work at Google. Anyone who doesn't work at Google must be wasting their time! Imagine working somewhere lame like Capital One HAHA!"
+        text = "I sure do love working at Google. It is a really cool place! In my opinion, everyone should work at Google. Anyone who doesn't work at Google must be wasting their time! Imagine working somewhere lame like Amazon HAHA!"
         analysis = get_nlp_analysis(text)
         print(analysis)
         return jsonify(analysis), 200
@@ -326,16 +328,20 @@ if __name__ == "__main__":
 
 
 def word_density_score(text):
-    words = len(text.split())
-    words_per_minute = words / (get_wave_duration() / 60)
-    if words_per_minute < 100:
-        return int(100 * (words_per_minute / 100))
-    elif words_per_minute > 150 and words_per_minute < 250:
-        return int(100 * (250 - words_per_minute) / 100)
-    elif words_per_minute >= 250:
+    wpm = words_per_minute(text)
+    if wpm < 100:
+        return int(100 * (wpm / 100))
+    elif wpm > 150 and wpm < 250:
+        return int(100 * (250 - wpm) / 100)
+    elif wpm >= 250:
         return 0
     else:
         return 100
+
+
+def words_per_minute(text):
+    words = len(text.split())
+    return words / (get_wave_duration() / 60)
 
 
 def duration_score():

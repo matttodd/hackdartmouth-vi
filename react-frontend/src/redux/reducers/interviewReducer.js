@@ -9,6 +9,8 @@ const initialState = {
     sentiment_score: 0,
     text: "",
     word_density_score: 0,
+    raw_duration: 0,
+    raw_wpm: 0,
   },
 };
 
