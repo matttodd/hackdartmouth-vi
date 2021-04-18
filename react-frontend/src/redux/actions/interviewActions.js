@@ -4,8 +4,6 @@ import axios from "axios";
 
 export const postInterviewResponse = (audioFile) => (dispatch) => {
   // format audioFile
-  console.log("FUCK");
-  console.log(audioFile);
   let formData = new FormData();
   // formData.append("image", imagefile.files[0]);
   formData.append("audio", audioFile);
