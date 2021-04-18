@@ -152,6 +152,45 @@ def get_profile(user_id):
 # GCLOUD ENDPOINTS
 # @app.route("/interviews/nlp", methods=["GET"])
 # @cross_origin()
+
+
+def word_density_score(text):
+    wpm = words_per_minute(text)
+    if wpm < 100:
+        return int(100 * (wpm / 100))
+    elif wpm > 150 and wpm < 250:
+        return int(100 * (250 - wpm) / 100)
+    elif wpm >= 250:
+        return 0
+    else:
+        return 100
+
+
+def words_per_minute(text):
+    words = len(text.split())
+    return words / (get_wave_duration() / 60)
+
+
+def duration_score():
+    duration = get_wave_duration()
+    if duration < 30:
+        return int(100 * (duration / 30))
+    elif duration > 120 and duration < 300:
+        return int(100 * (300 - duration) / 180)
+    elif duration >= 300:
+        return 0
+    else:
+        return 100
+
+
+def get_wave_duration():
+    with contextlib.closing(wave.open("temp.wav", "r")) as f:
+        frames = f.getnframes()
+        rate = f.getframerate()
+        duration = frames / float(rate)
+        return duration
+
+
 def get_nlp_analysis(text):
     """
     Get NLP analysis
@@ -323,43 +362,6 @@ def session_login():
 port = int(os.environ.get("PORT", 8080))
 if __name__ == "__main__":
     app.run(threaded=True, host="0.0.0.0", port=port)
-
-
-def word_density_score(text):
-    wpm = words_per_minute(text)
-    if wpm < 100:
-        return int(100 * (wpm / 100))
-    elif wpm > 150 and wpm < 250:
-        return int(100 * (250 - wpm) / 100)
-    elif wpm >= 250:
-        return 0
-    else:
-        return 100
-
-
-def words_per_minute(text):
-    words = len(text.split())
-    return words / (get_wave_duration() / 60)
-
-
-def duration_score():
-    duration = get_wave_duration()
-    if duration < 30:
-        return int(100 * (duration / 30))
-    elif duration > 120 and duration < 300:
-        return int(100 * (300 - duration) / 180)
-    elif duration >= 300:
-        return 0
-    else:
-        return 100
-
-
-def get_wave_duration():
-    with contextlib.closing(wave.open("temp.wav", "r")) as f:
-        frames = f.getnframes()
-        rate = f.getframerate()
-        duration = frames / float(rate)
-        return duration
 
 
 # export FLASK_DEBUG=1

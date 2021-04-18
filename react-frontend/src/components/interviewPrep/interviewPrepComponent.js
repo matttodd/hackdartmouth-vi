@@ -86,7 +86,7 @@ class InterviewPrep extends Component {
     let overall_score = analysis.overall_score;
     let raw_duration = analysis.raw_duration;
     let raw_wpm = analysis.raw_wpm;
-
+    // In a team of 4, I participated in HackDartmouth and served as my team’s designer. With a chrome extension and web app, job architech was created to help manage job applications and interview prep."
     return (
       <div className="container">
         <section className="interview-qa">
