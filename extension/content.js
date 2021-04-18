@@ -34,10 +34,10 @@ function doStuffWithDom(domContent, url) {
         spans.push(element);
       }
     });
-    console.log(spans);
+    // console.log(spans);
     let location = spans[2].textContent.trim();
 
-    alert(`applying to company with ${companyName}, ${title}, ${location}, at ${url}`);
+    // alert(`applying to company with ${companyName}, ${title}, ${location}, at ${url}`);
     chrome.runtime.sendMessage({
       msg: "updatePopup",
       company: companyName,
